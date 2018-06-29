@@ -26,14 +26,20 @@ const io    = require('socket.io')(server);
 
 require('./socket/socket')(io);
 
-mongoose.connect(
-    "mongodb://aji:ajiganteng@asmart-shard-00-00-zef5d.mongodb.net:27017,asmart-shard-00-01-zef5d.mongodb.net:27017,asmart-shard-00-02-zef5d.mongodb.net:27017/test?ssl=true&replicaSet=Asmart-shard-0&authSource=admin").then(
-        () => {
-            console.log("sukses");
-        },err => {
-            console.log("Failed");
-        }
-    );
+//mongoose.connect(
+//    "mongodb://aji:ajiganteng@asmart-shard-00-00-zef5d.mongodb.net:27017,asmart-shard-00-01-zef5d.mongodb.net:27017,asmart-shard-00-02-zef5d.mongodb.net:27017/test?ssl=true&replicaSet=Asmart-shard-0&authSource=admin").then(
+//        () => {
+//            console.log("sukses");
+//        },err => {
+//            console.log("Failed");
+//        }
+//    );
+
+//database connect
+var db = require('./config/db');
+mongoose.connect(db.url, (err) =>{
+    console.log('Connect');
+});
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
