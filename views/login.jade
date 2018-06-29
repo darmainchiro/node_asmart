@@ -1,0 +1,72 @@
+doctype html
+html(lang='en')
+  head
+    title Login V2
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // ===============================================================================================
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/bootstrap/dist/js/bootstrap.min.js')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/fonts/iconic/css/material-design-iconic-font.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/animate/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/css-hamburgers/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/animsition/css/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/dist/css/select2/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/vendors/daterangepicker/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/css/util.css')
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/css/main.css')
+    // ===============================================================================================
+  body
+    .limiter
+      .container-login100
+        .wrap-login100
+          form.login100-form.validate-form
+            span.login100-form-title.p-b-26
+              | Welcome
+            span.login100-form-title.p-b-48
+              i.zmdi.zmdi-font
+            .wrap-input100.validate-input(data-validate='Valid email is: a@b.c')
+              input.input100(type='text', name='email')
+              span.focus-input100(data-placeholder='Email')
+            .wrap-input100.validate-input(data-validate='Enter password')
+              span.btn-show-pass
+                i.zmdi.zmdi-eye
+              input.input100(type='password', name='pass')
+              span.focus-input100(data-placeholder='Password')
+            .container-login100-form-btn
+              .wrap-login100-form-btn
+                .login100-form-bgbtn
+                button.login100-form-btn
+                  | Login
+            .text-center.p-t-115
+              span.txt1
+                | Don’t have an account?
+              a.txt2(href='#')
+                | Sign Up
+    #dropDownSelect1
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/jquery/dist/jquery.min.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/animsition/js/animsition.min.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/bootstrap/js/popper.js')
+    script(src='http://localhost:3000/vendors/bootstrap/dist/js/bootstrap.min.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/select2/dist/css/select2.min.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/daterangepicker/moment.min.js')
+    script(src='http://localhost:3000/vendors/daterangepicker/daterangepicker.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/vendors/countdowntime/countdowntime.js')
+    // ===============================================================================================
+    script(src='http://localhost:3000/js/main.js')

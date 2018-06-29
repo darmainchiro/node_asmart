@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+  button#btnOn ON
+  button#btnOff OFF
+  button#btnon ON1
+  button#btnoff OFF1
+  p#pesan
+
+  script(src = "https://web-socketku.herokuapp.com/socket.io/socket.io.js")
+  script.
+   var pesan = document.getElementById("pesan");
+   var btnOn = document.getElementById("btnOn");
+   var btnOff = document.getElementById("btnOff");
+   var btnon = document.getElementById("btnon");
+   var btnoff = document.getElementById("btnoff");
+
+   var io = io.connect("https://web-socketku.herokuapp.com/");
+
+   btnOn.addEventListener("click", function(){
+    io.emit("led1", 1);
+   });
+
+   btnOff.addEventListener("click", function(){
+    io.emit("led1", 0);
+   });
+
+   btnon.addEventListener("click", function(){
+    io.emit("led2", 1);
+   })
+
+   btnoff.addEventListener("click", function(){
+    io.emit("led2", 0);
+   })
+
+   io.on("led1", function(data){
+    pesan.innerHTML = data;
+   });
+
+   io.on("led2", function(data){
+    pesan.innerHTML = data;
+   })

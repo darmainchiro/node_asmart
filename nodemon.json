@@ -1,0 +1,6 @@
+{
+    "env":{
+        "MONGO_ATLAS_PW": "ajiganteng",
+        "JWT_KEY": "secret_key"
+    }
+}

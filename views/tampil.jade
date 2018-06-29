@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1= title
+  button#btnOn ON
+  button#btnOff OFF
+  button#btnon ON1
+  button#btnoff OFF1
+  p#pesan
+
+  p= datasensor
+
+  script(src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js")
+  script.
+   var pesan = document.getElementById("pesan");
+   var btnOn = document.getElementById("btnOn");
+   var btnOff = document.getElementById("btnOff");
+   var btnon = document.getElementById("btnon");
+   var btnoff = document.getElementById("btnoff");
+
+   //var io = io.connect("https://control-led.herokuapp.com/");
+   var io = io.connect('http://localhost:3000/')
+
+   btnOn.addEventListener("click", function(){
+    io.emit("relay1", {status: true});
+   });
+
+   btnOff.addEventListener("click", function(){
+    io.emit("relay1", {status: false});
+   });
+
+   btnon.addEventListener("click", function(){
+    io.emit("relay2", {status: true});
+   })
+
+   btnoff.addEventListener("click", function(){
+    io.emit("relay2", {status: false});
+   })
+
+   io.on("relay1", function(data){
+    pesan.innerHTML = data.status;
+   });
+
+   io.on("relay2", function(data){
+    pesan.innerHTML = data.status;
+   })

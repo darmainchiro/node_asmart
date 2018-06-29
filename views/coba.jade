@@ -1,0 +1,43 @@
+extends layout
+
+block content
+ // Main content
+ section.content
+  // Default box
+  .box
+   .box-body.no-padding
+   table.table.table-striped
+    tr
+     th(style='width: 20px') No
+     th Temperature
+     th Suhu
+     th Created At
+    each data, i in datakondisi
+     tr
+      td #{i+1}
+      td #{data.temperature} Celcius
+      td #{data.humidity} Celcius
+      td
+       span.badge.bg-green #{data.humidity}
+   // /.box-body
+   .box-footer
+    | Find Your Locations
+   // /.box-footer
+  // /.box
+ // /.content
+
+
+ style.
+     .button {
+     background-color: #4CAF50; /* Green */
+     border: none;
+     color: white;
+     padding: 8px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 12px;
+     margin: 4px 2px;
+     cursor: pointer;
+     }
+     .mybutton {border-radius: 2px;}

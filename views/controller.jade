@@ -1,0 +1,166 @@
+extends layout
+
+block content
+   // Main content
+   section.content
+   .page-title
+      .title_left
+        h3
+          | Controller of Watering Plant 
+      .title_right
+        .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+          .input-group
+            input.form-control(type='text', placeholder='Search for...')
+            span.input-group-btn
+              button.btn.btn-default(type='button') Go!
+    .clearfix
+    // Default box
+    .box
+     .box-body
+
+      // checkbox
+      style.
+       /* The switch - the box around the slider */
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {display:none;}
+
+        /* The slider */
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        input:checked + .slider {
+          background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+          box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 34px;
+        }
+
+        .slider.round:before {
+          border-radius: 50%;
+        }
+
+      .form-group
+       // Rounded switch
+       label ON/OFF MOTOR PUMP
+       br
+       label.switch
+        input#statusmotor(type='checkbox')
+        span.slider.round
+
+       br
+       br
+
+       label ON/OFF TAP WATER
+       br
+       label.switch
+        input#statuswater(type='checkbox')
+        span.slider.round
+
+       br
+
+     // /.box-body
+     .box-footer
+     // /.box-footer
+    // /.box
+   // /.content
+
+   script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js')
+   script.
+    var sc = io.connect('https://asmartfarm.herokuapp.com/');
+    //- var sc = io('https://trackcar.herokuapp.com/')
+    var motor = document.getElementById('statusmotor');
+    var water = document.getElementById('statuswater');
+    var ft = document.getElementById('takePicture');
+    var pft = document.getElementById('pesantakefoto');
+
+    motor.addEventListener('change', ()=>{
+     if(motor.checked){
+      sc.emit('relay1', {msg: true});
+      //- //sc.broadcast.emit('statusmotor', {msg: 1});
+     }
+     else{
+      sc.emit('relay1', {msg: false});
+      //sc.broadcast.emit('statusmotor', {msg: 0});
+     }
+    });
+
+    water.addEventListener('change', ()=>{
+     if(water.checked){
+      sc.emit('statuswater', {msg: true});
+      //sc.broadcast.emit('statuswater', {msg: 1});
+     }
+     else{
+      sc.emit('statuswater', {msg: false});
+      //sc.broadcast.emit('statuswater', {msg: 0});
+     }
+    });
+
+    ft.addEventListener('click', ()=>{
+     sc.emit('takefoto', {msg: "takefoto"});
+     pft.innerHTML = "Take Foto Berhasil.";
+    });
+
+    sc.on('relay1', (data)=>{
+     if(data.msg){
+      motor.checked = true;
+      console.log(data.msg);
+     }
+     else{
+      motor.checked = false;
+     }
+    });
+
+    sc.on('statuswater', (data)=>{
+     if(data.msg){
+      water.checked = true;
+      console.log(data.msg);
+     }
+     else{
+      water.checked = false;
+     }
+    });
+
+    sc.on('takefoto', (data)=>{
+     console.log(data.msg);
+     pft.innerHTML = data.msg+" Berhasil.";
+    });
