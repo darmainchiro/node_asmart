@@ -21,6 +21,7 @@ const historyRouter     = require('./routes/history');
 const usersRouter       = require('./routes/users');
 const cobaRouter        = require('./routes/coba');
 const ajiku             = require('./routes/api');
+const notifikasiRouter  = require('./api/routes/notifikasi');
 
 const server  = require('http').Server(app);
 const io    = require('socket.io')(server);
@@ -87,6 +88,7 @@ app.use('/water',[waterRoutes]);
 app.use('/user', [userRoutes]);
 app.use('/coba', cobaRouter);
 app.use('/api', ajiku);
+app.use('/notifikasi/token',[notifikasiRouter]);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
