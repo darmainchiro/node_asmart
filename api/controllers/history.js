@@ -23,7 +23,7 @@ exports.history_get_all = (req, res, next) => {
                     _id: doc._id,
                     request: {
                         type:'GET',
-                        url: 'http://localhost:3000/historyku/'+ doc._id
+                        url: 'https://guna.jagopesan.com/historyku/'+ doc._id
                     }
                 }
             })
@@ -66,7 +66,7 @@ exports.history_create = (req, res, next) => {
                     _id: result._id,
                     request: {
                         type: 'GET',
-                        url: "http://localhost:3000/historyku/"+ result._id
+                        url: "https://guna.jagopesan.com/historyku/"+ result._id
                     }
                 }
             });
@@ -91,7 +91,7 @@ exports.history_get_item = (req, res, next) => {
                 historyku: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3000/historyku'
+                    url: 'https://guna.jagopesan.com/historyku'
                 }
             });
         }else{

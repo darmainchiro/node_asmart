@@ -176,24 +176,40 @@ var strRule = ["SSdkt", "Sdkt", "ASdkt", "Sedang", "ABnyk", "Bnyk", "SBnyk"];
 	var index=[]; var rule=[]; var valRule=[]; var z=[];
 	console.log(strValTemp[0]+' '+strValTemp[1]);
 	console.log(valTemp[0]+' '+valTemp[1]);
-	if(statusTemp == 1 && statusHum == 1){
-		var hasilSearch = searchRule(strValTemp, valTemp, strValHum, valHum, 1, 10);
+	if(statusTemp == 1 && statusHum == 1 && statusSoil == 1 && statusAir == 1){
+		var hasilSearch = searchRule(strValTemp, valTemp, strValHum, valHum, strSoil, valSoil, strAir, valAir, 1, 10);
 		index = hasilSearch[0]; rule = hasilSearch[1]; valRule = hasilSearch[2]; z = hasilSearch[3];
 		console.log(rule + " : " + valRule + " -> z= " + z);
 		sumSZxA = sumZxA + (z*valRule);
 		sumA = sumA + (valRule)*1;
 		
-	} else if(statusTemp == 1 && statusHum == 2){
+	} else if(statusTemp == 1 && statusHum == 2 && statusSoil == 1 && statusAir == 1){
 		for (var i=0; i<=1; i++){
-			var hasilSearch = searchRule(strValTemp, valTemp, strValHum[i], valHum[i], 2, i);
+			var hasilSearch = searchRule(strValTemp, valTemp, strValHum[i], valHum[i], strSoil, valSoil, strAir, valAir, 2, i);
 			index[i] = hasilSearch[0]; rule[i] = hasilSearch[1]; valRule[i] = hasilSearch[2]; z[i] = hasilSearch[3];
 			console.log(rule[i] + " : " + valRule[i] + " -> z= " + z[i]);
 			sumZxA = sumZxA + (z[i]*valRule[i]);
 			sumA = sumA + (valRule[i])*1;
 		}
-	} else if(statusTemp == 2 && statusHum == 1){
+	}else if(statusTemp == 1 && statusHum == 1 && statusSoil == 2 && statusAir == 1){
 		for (var i=0; i<=1; i++){
-			var hasilSearch = searchRule(strValTemp[i], valTemp[i], strValHum, valHum, 2, i);
+			var hasilSearch = searchRule(strValTemp, valTemp, strValHum, valHum, strValSoil[i], valSoil[i], strValAir, valAir, 2, i);
+			index[i] = hasilSearch[0]; rule[i] = hasilSearch[1]; valRule[i] = hasilSearch[2]; z[i] = hasilSearch[3];
+			console.log(rule[i] + " : " + valRule[i] + " -> z= " + z[i]);
+			sumZxA = sumZxA + (z[i]*valRule[i]);
+			sumA = sumA + (valRule[i])*1;
+		}
+	}else if(statusTemp == 1 && statusHum == 1 && statusSoil == 1 && statusAir == 2){
+		for (var i=0; i<=1; i++){
+			var hasilSearch = searchRule(strValTemp, valTemp, strValHum[i], valHum[i], strValSoil, valSoil, strValAir[i], valAir[i], 2, i);
+			index[i] = hasilSearch[0]; rule[i] = hasilSearch[1]; valRule[i] = hasilSearch[2]; z[i] = hasilSearch[3];
+			console.log(rule[i] + " : " + valRule[i] + " -> z= " + z[i]);
+			sumZxA = sumZxA + (z[i]*valRule[i]);
+			sumA = sumA + (valRule[i])*1;
+		}
+	} else if(statusTemp == 2 && statusHum == 1 && statusSoil == 1 && statusAir == 1){
+		for (var i=0; i<=1; i++){
+			var hasilSearch = searchRule(strValTemp[i], valTemp[i], strValHum, valHum, strValSoil, valSoil, strValAir, valAir, 2, i);
 			index[i] = hasilSearch[0]; rule[i] = hasilSearch[1]; valRule[i] = hasilSearch[2]; z[i] = hasilSearch[3];
 			console.log(rule[i] + " : " + valRule[i] + " -> z= " + z[i]);
 			sumZxA = sumZxA + (z[i]*valRule[i]);
@@ -229,6 +245,8 @@ var strRule = ["SSdkt", "Sdkt", "ASdkt", "Sedang", "ABnyk", "Bnyk", "SBnyk"];
 	return zAkhir;
 	temp =0;
 	hum =0;
+	soil =0;
+	air =0;
 }
 
  searchTemp1 = function(i){
@@ -371,7 +389,7 @@ searchAir1 = function(i){
 	return [strValAirBawah, valAirBawah, strValAirAtas, valAirAtas, statusAir];
 };
 
- searchRule = function(strTempInp, valTemp, strHumInp, valHum, type, pos){
+ searchRule = function(strTempInp, valTemp, strHumInp, valHum, strSoil, valSoil, strAir, valAir, type, pos){
 	var str="";
 	var i=0;
 	var valRule=0;

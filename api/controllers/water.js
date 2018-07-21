@@ -18,7 +18,7 @@ exports.water_get_all = (req, res, next) => {
                     _id: doc._id,
                     request: {
                         type:'GET',
-                        url: 'http://localhost:3042/water/'+ doc._id
+                        url: 'https://guna.jagopesan.com/water/'+ doc._id
                     }
                 }
             })
@@ -51,7 +51,7 @@ exports.water_create = (req, res, next) => {
                     _id: result._id,
                     request: {
                         type: 'GET',
-                        url: "http://localhost:3042/water/"+ result._id
+                        url: "https://guna.jagopesan.com/water/"+ result._id
                     }
                 }
             });
@@ -76,7 +76,7 @@ exports.water_get_item = (req, res, next) => {
                 waterku: doc,
                 request: {
                     type: 'GET',
-                    url: 'http://localhost:3042/water'
+                    url: 'https://guna.jagopesan.com/water'
                 }
             });
         }else{
