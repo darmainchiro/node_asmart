@@ -14,6 +14,11 @@ module.exports = function(io){
             io.emit('statuswater',{msg: data.msg});
         });
 
+        socket.on('readsensor', function(data){
+			console.log('Waspmote agriculture sensor: ', data.msg);
+			io.emit('readsensor', {status: data.msg});
+		});
+
         socket.on('disconnect',function(){
             userSocket--;
             console.log("disconnect");

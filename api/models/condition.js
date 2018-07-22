@@ -8,6 +8,7 @@ const conditionSchema = mongoose.Schema({
     humidity: {type: Number, required: true },
     soilmoisture: {type: Number, required: true },
     airpressure: {type: Number, required: true },
+    volume: Number,
     batteray: {type: Number, required: true }
 });
 

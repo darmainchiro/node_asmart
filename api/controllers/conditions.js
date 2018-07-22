@@ -42,7 +42,7 @@ exports.conditions_current = (req, res, next) => {
     Conditionku.find()
     .sort({time: -1})
     .limit(1)
-    .select('sayuran time _id temperature humidity soilmoisture airpressure batteray')
+    .select('sayuran time _id temperature humidity soilmoisture airpressure batteray volume')
     .exec()
     .then(docs => {
         const response = {
@@ -55,6 +55,7 @@ exports.conditions_current = (req, res, next) => {
                     humidity: doc.humidity,
                     soilmoisture: doc.soilmoisture,
                     airpressure: doc.airpressure,
+                    volume:doc.volume,
                     batteray: doc.batteray,
                     _id: doc._id,
                     request: {
@@ -74,6 +75,23 @@ exports.conditions_current = (req, res, next) => {
     });
 }
 
+exports.conditions_volume = (req, res, next) => {
+    Conditionku.find({}, function(err, data){
+        var ubahJson = {"volume": data[0].volume};
+        res.json(ubahJson);
+    })
+    .sort({time: -1})
+    .limit(1)
+    .select('volume')
+    .exec()
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
 exports.conditions_create = (req, res, next) => {
     const conditionku = new Conditionku({
         _id: new mongoose.Types.ObjectId(),
@@ -83,6 +101,7 @@ exports.conditions_create = (req, res, next) => {
         humidity: req.body.humidity,
         soilmoisture: req.body.soilmoisture,
         airpressure: req.body.airpressure,
+        volume: req.body.volume,
         batteray: req.body.batteray
     });
     conditionku
@@ -98,6 +117,7 @@ exports.conditions_create = (req, res, next) => {
                     humidity: result.humidity,
                     soilmoisture: result.soilmoisture,
                     airpressure: result.airpressure,
+                    volume:result.volume,
                     batteray: result.batteray,
                     _id: result._id,
                     request: {

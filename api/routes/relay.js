@@ -5,7 +5,9 @@ const RelaysController = require('../controllers/relay');
 
 router.get('/', RelaysController.relay_get_all);
 
-router.post('/', RelaysController.relay_create);
+router.post('/update_relay/motorpump', RelaysController.relay_Motor_update);
+
+router.post('/update_relay/solenoid', RelaysController.relay_Solenoid_update);
 
 
 // router.patch('/:conditionId', checkAuth, ConditionsController.conditions_update_item);

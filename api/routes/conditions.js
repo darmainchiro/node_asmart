@@ -7,6 +7,8 @@ router.get('/', ConditionsController.conditions_get_all);
 
 router.get('/current/',ConditionsController.conditions_current);
 
+router.get('/volume', ConditionsController.conditions_volume);
+
 router.post('/', ConditionsController.conditions_create);
 
 router.get('/:conditionId', ConditionsController.conditions_get_item);
