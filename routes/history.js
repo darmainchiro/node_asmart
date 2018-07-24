@@ -9,7 +9,7 @@ const Conditionku = require('../api/models/condition');
 router.get('/', function(req, res){
   Conditionku.find()
   .sort({time: -1})
-  .select('sayuran time _id temperature humidity soilmoisture airpressure batteray')
+  .select('sayuran time _id temperature humidity soilmoisture airpressure volume batteray')
   .then(docs => {
       res.render('history',{
           datakondisi: docs
