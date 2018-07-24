@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dateFormat = require('dateformat');
 const Conditionku = require('../models/condition');
-
+// Date.parse('Thu, 01 Jan 1970 00:00:00 GMT-0400');
 
 exports.conditions_get_all = (req, res, next) => {
     Conditionku.find()
@@ -13,7 +13,7 @@ exports.conditions_get_all = (req, res, next) => {
             count: docs.length,
             conditions: docs.map(doc => {
                 return {
-                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT GMT+0700"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
