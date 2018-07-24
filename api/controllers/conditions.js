@@ -14,7 +14,7 @@ exports.conditions_get_all = (req, res, next) => {
             conditions: docs.map(doc => { 
                 var aji = new Date(doc.time);
                 var guna = new Date();
-                guna.setTime(aji.getTime()+25200000);
+                guna.setTime(aji.getTime());
                 return {
                     time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
@@ -51,8 +51,11 @@ exports.conditions_current = (req, res, next) => {
         const response = {
             count: docs.length,
             conditions: docs.map(doc => {
+                var aji = new Date(doc.time);
+                var guna = new Date();
+                guna.setTime(aji.getTime());
                 return {
-                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+                    time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
