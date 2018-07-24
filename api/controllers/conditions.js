@@ -13,7 +13,7 @@ exports.conditions_get_all = (req, res, next) => {
             count: docs.length,
             conditions: docs.map(doc => {
                 return {
-                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT GMT+0700"),
+                    time: doc.time.parse('Thu, 01 Jan 1970 00:00:00 GMT+0700'),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
@@ -49,7 +49,7 @@ exports.conditions_current = (req, res, next) => {
             count: docs.length,
             conditions: docs.map(doc => {
                 return {
-                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+                    time: doc.time.parse('Thu, 01 Jan 1970 00:00:00 GMT+0700'),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
@@ -96,7 +96,7 @@ exports.conditions_create = (req, res, next) => {
     const conditionku = new Conditionku({
         _id: new mongoose.Types.ObjectId(),
         sayuran: req.body.sayuran,
-        time: new Date(),
+        time: Date.now,
         temperature: req.body.temperature,
         humidity: req.body.humidity,
         soilmoisture: req.body.soilmoisture,
