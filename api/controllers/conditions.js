@@ -17,7 +17,7 @@ exports.conditions_get_all = (req, res, next) => {
         const response = {
             count: docs.length,
             conditions: docs.map(doc => {
-                var a = moment(doc.time,"dddd, mmmm dS, yyyy, h:MM:ss TT").zone("+07:00");
+                var a = moment(doc.time).utcOffset("+07:00");
                 // console.log(a.format());
                 var aji = new Date(a.format());
                 var guna = new Date();
@@ -59,7 +59,7 @@ exports.conditions_current = (req, res, next) => {
         const response = {
             count: docs.length,
             conditions: docs.map(doc => {
-                var a = moment(doc.time,"dddd, mmmm dS, yyyy, h:MM:ss TT").zone("+07:00");
+                var a = moment(doc.time).utcOffset("+07:00");
                 // console.log(a.format());
                 var aji = new Date(a.format());
                 var guna = new Date();
