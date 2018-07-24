@@ -11,9 +11,12 @@ exports.conditions_get_all = (req, res, next) => {
     .then(docs => {
         const response = {
             count: docs.length,
-            conditions: docs.map(doc => {
+            conditions: docs.map(doc => { 
+                var aji = new Date(doc.time);
+                var guna = new Date();
+                guna.setTime(aji.getTime()+25200000);
                 return {
-                    time: doc.time.parse('Thu, 01 Jan 1970 00:00:00 GMT+0700'),
+                    time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
@@ -49,7 +52,7 @@ exports.conditions_current = (req, res, next) => {
             count: docs.length,
             conditions: docs.map(doc => {
                 return {
-                    time: doc.time.parse('Thu, 01 Jan 1970 00:00:00 GMT+0700'),
+                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
