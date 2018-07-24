@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const dateFormat = require('dateformat');
 const Conditionku = require('../models/condition');
+var moment = require('moment');
+
+
+
+
 // Date.parse('Thu, 01 Jan 1970 00:00:00 GMT-0400');
 
 exports.conditions_get_all = (req, res, next) => {
@@ -11,10 +16,13 @@ exports.conditions_get_all = (req, res, next) => {
     .then(docs => {
         const response = {
             count: docs.length,
-            conditions: docs.map(doc => { 
-                var aji = new Date(doc.time);
+            conditions: docs.map(doc => {
+                var a = moment(doc.time,"dddd, mmmm dS, yyyy, h:MM:ss TT").zone("+07:00");
+                // console.log(a.format());
+                var aji = new Date(a.format());
                 var guna = new Date();
                 guna.setTime(aji.getTime());
+                // console.log(guna);
                 return {
                     time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
@@ -51,7 +59,9 @@ exports.conditions_current = (req, res, next) => {
         const response = {
             count: docs.length,
             conditions: docs.map(doc => {
-                var aji = new Date(doc.time);
+                var a = moment(doc.time,"dddd, mmmm dS, yyyy, h:MM:ss TT").zone("+07:00");
+                // console.log(a.format());
+                var aji = new Date(a.format());
                 var guna = new Date();
                 guna.setTime(aji.getTime());
                 return {
