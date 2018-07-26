@@ -24,7 +24,7 @@ exports.conditions_get_all = (req, res, next) => {
                 guna.setTime(aji.getTime());
                 // console.log(guna);
                 return {
-                    time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
@@ -65,7 +65,7 @@ exports.conditions_current = (req, res, next) => {
                 var guna = new Date();
                 guna.setTime(aji.getTime());
                 return {
-                    time: dateFormat(guna, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+                    time: dateFormat(doc.time, "dddd, mmmm dS, yyyy, h:MM:ss TT"),
                     sayuran: doc.sayuran,
                     temperature: doc.temperature,
                     humidity: doc.humidity,
@@ -112,7 +112,7 @@ exports.conditions_create = (req, res, next) => {
     const conditionku = new Conditionku({
         _id: new mongoose.Types.ObjectId(),
         sayuran: req.body.sayuran,
-        time: Date.now,
+        time: new Date(),
         temperature: req.body.temperature,
         humidity: req.body.humidity,
         soilmoisture: req.body.soilmoisture,
